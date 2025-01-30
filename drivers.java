@@ -1,4 +1,4 @@
-import java.sql.Driver;
+
 import java.util.*;
 
 public class drivers {
@@ -56,13 +56,28 @@ public class drivers {
         System.out.println("Wallet Balance: $" + wallet);
         System.out.println("----------------------------------");
     }
+
+    @Override
+    public boolean equals(Object d2){
+   if(this==d2){
+    return true;
+   }
+   if(!(d2 instanceof drivers)){
+    return false;
+   }
+   drivers obj = (drivers) d2;
+     return this.name.equals(obj.name)&&this.licensePlate.equals(obj.licensePlate);
+    }
+     
+    
+
     
 
 public static void main(String args[]){
 
  drivers driver1 = new drivers("7001", "Tom Cruise", "Toyota Corolla", "ABC1234");
-drivers driver2 = new drivers("7002", "Brad Pitt", "Audi S4", "XYZ5678");
-drivers driver3 = new drivers("7003", "Tom Cruise", "Toyota Corolla","ABC1234");
+ drivers driver2 = new drivers("7002", "Brad Pitt", "Audi S4", "XYZ5678");
+ drivers driver3 = new drivers("7003", "Tom Cruise", "Toyota Corolla","ABC1234");
 System.out.println(driver1.getId());
 System.out.println(driver1.licensePlate);
 driver1.setCarModel("Toyota inova");
@@ -71,8 +86,14 @@ System.out.println(driver1.carModel);
 driver1.getInfo();
 
 
+System.out.println(driver1.equals(driver3));
+
+
+
+
 }
 
 }
+
 
 
