@@ -65,6 +65,7 @@ public class User {
 
     public void setDelivery(int delivery) {
         this.delivery = delivery;
+       
     }
 
     
@@ -76,10 +77,10 @@ public class User {
         System.out.println("Total Rides: " + rides);
         System.out.println("Total Deliveries: " + delivery);
     }
+     
+    
 
-    public static boolean equal(drivers d1, drivers d2){
-        return false;
-    }
+    
 
     public static void main(String[] args) {
         User user1 = new User("1001", "Alice Johnson", "123 Main St, Toronto",55);
@@ -98,3 +99,4 @@ public class User {
         user2.infoUser();
     }
 }
+
