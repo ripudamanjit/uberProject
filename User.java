@@ -77,6 +77,17 @@ public class User {
         System.out.println("Total Rides: " + rides);
         System.out.println("Total Deliveries: " + delivery);
     }
+    @Override
+    public boolean equals(Object d2){
+   if(this==d2){
+    return true;
+   }
+   if(!(d2 instanceof User)){
+    return false;
+   }
+     User obj = (User) d2;
+     return this.name.equals(obj.name)&&this.address.equals(obj.address);
+    }
      
     
 
