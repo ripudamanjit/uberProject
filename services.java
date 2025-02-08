@@ -79,6 +79,16 @@ public void setCost(double cost) {
         
         return Integer.compare(this.distance, other.distance);
 }
-    
+
+public void PrintInfo() {
+    System.out.println("Service Type: " + getServiceType());
+    System.out.println("Driver: " +driver.getName());
+    System.out.println("From: " + from);
+    System.out.println("To: " + to);
+    System.out.println("User: " +  user.getName());
+    System.out.println("Distance: " + distance + " km");
+    System.out.println("Cost: $" + cost);
+}
+
     
 }
