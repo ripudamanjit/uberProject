@@ -1,15 +1,15 @@
 import java.util.*;
 
 public class drivers {
-    String user_id; 
+    String driver_id; 
     String name; 
     String carModel; 
     String licensePlate; 
     double wallet;
     String address;  // Added address attribute
 
-    public drivers(String user_id, String name, String carModel, String licensePlate, String address) {
-        this.user_id = user_id;
+    public drivers(String driver_id, String name, String carModel, String licensePlate, String address) {
+        this.driver_id = driver_id;
         this.name = name; 
         this.carModel = carModel; 
         this.licensePlate = licensePlate; 
@@ -18,11 +18,11 @@ public class drivers {
     }
 
     public String getId() {
-        return user_id;
+        return driver_id;
     }
 
     public void setID(String id) {
-        this.user_id = id;
+        this.driver_id = id;
     }
 
     public String getName() {
