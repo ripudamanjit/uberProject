@@ -32,10 +32,10 @@ public class registration {
 
     public static void predefinedDriver(ArrayList<drivers> drivers) {
 
-        drivers.add(new drivers(genDriverID(drivers), "Tom Cruise", "Toyota Corolla", "MAVERICK", "34 4th Street"));
-        drivers.add(new drivers(genDriverID(drivers), "Brad Pitt", "Audi S4", "FGDR 983", "85 8th Street"));
-        drivers.add(new drivers(genDriverID(drivers), "Millie Brown", "Tesla", "STRNGRTHGS", "67 9th Avenue"));
-        drivers.add(new drivers(genDriverID(drivers), "Tim Chalamet", "Thopter", "DUNE", "21 8th Avenue"));
-        drivers.add(new drivers(genDriverID(drivers), "John Boyega", "X-Wing", "REBEL", "32 7th Avenue"));
+        drivers.add(new drivers(genDriverID(drivers), "Tom Cruise", "Toyota Corolla", "MAVERICK"));
+        drivers.add(new drivers(genDriverID(drivers), "Brad Pitt", "Audi S4", "FGDR 983"));
+        drivers.add(new drivers(genDriverID(drivers), "Millie Brown", "Tesla", "STRNGRTHGS"));
+        drivers.add(new drivers(genDriverID(drivers), "Tim Chalamet", "Thopter", "DUNE"));
+        drivers.add(new drivers(genDriverID(drivers), "John Boyega", "X-Wing", "REBEL"));
     }
 }
