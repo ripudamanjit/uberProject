@@ -6,17 +6,26 @@ public class drivers {
     String carModel; 
     String licensePlate; 
     double wallet;
-    String address;  // Added address attribute
+      
+    public static enum Status{Available,Driving};
+  private Status status;
 
-    public drivers(String driver_id, String name, String carModel, String licensePlate, String address) {
+
+    public drivers(String driver_id, String name, String carModel, String licensePlate) {
         this.driver_id = driver_id;
         this.name = name; 
         this.carModel = carModel; 
         this.licensePlate = licensePlate; 
         this.wallet = 0;
         this.address = address;
+        this.status= Status.Available;
     }
 
+    public Status getStatus(){
+     return status;
+    }
+
+    
     public String getId() {
         return driver_id;
     }
@@ -57,20 +66,12 @@ public class drivers {
         this.wallet = wallet;
     }
 
-    public String getAddress() {  // Getter for address
-        return address;
-    }
-
-    public void setAddress(String address) {  // Setter for address
-        this.address = address;
-    }
 
     public void getInfo() {
-        System.out.println("Driver ID: " + user_id);
+        System.out.println("Driver ID: " + driver_id);
         System.out.println("Name: " + name);
         System.out.println("Car Model: " + carModel);
         System.out.println("License Plate: " + licensePlate);
-        System.out.println("Address: " + address);
         System.out.println("Wallet Balance: $" + wallet);
         System.out.println("----------------------------------");
     }
@@ -87,10 +88,30 @@ public class drivers {
         return this.name.equals(obj.name) && this.licensePlate.equals(obj.licensePlate);
     }
 
+
+    public void pay(double fee){
+        this.wallet= wallet+fee;
+    }
+
+    public boolean isAvailable(){
+        return status==Status.Available;
+    }
+
+
+    public void setStatus(Status available) {
+        if(available==Status.Available){
+            this.status=Status.Available;
+        }
+        else{
+            this.status=Status.Driving;
+        }
+    }
+
+
     public static void main(String args[]) {
-        drivers driver1 = new drivers("7001", "Tom Cruise", "Toyota Corolla", "ABC1234", "34 4th Street");
-        drivers driver2 = new drivers("7002", "Brad Pitt", "Audi S4", "XYZ5678", "85 8th Street");
-        drivers driver3 = new drivers("7003", "Tom Cruise", "Toyota Corolla", "ABC1234", "34 4th Street");
+        drivers driver1 = new drivers("7001", "Tom Cruise", "Toyota Corolla", "ABC1234");
+        drivers driver2 = new drivers("7002", "Brad Pitt", "Audi S4", "XYZ5678");
+        drivers driver3 = new drivers("7003", "Tom Cruise", "Toyota Corolla", "ABC1234");
 
         System.out.println(driver1.getId());
         System.out.println(driver1.getLicensePlate());
