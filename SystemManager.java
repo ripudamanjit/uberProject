@@ -1,3 +1,4 @@
+import java.sql.Driver;
 import java.util.*;
 
 
@@ -27,7 +28,7 @@ public class SystemManager {
 	}
 
 	public String getErrorMessage() {
-		return this.errMessage;
+		return errMessage;
 	}
 
 
@@ -75,25 +76,148 @@ public class SystemManager {
 
 
 
-    public drivers getDriver(String accountId) {
-        for (drivers driver : Drivers) {
-            if (driver.getId().equals(accountId)) {
-                return driver;
-            }
-        }
-        return null;
-    }
-    
-    private boolean driverExists(drivers driver) {
-        for (drivers existingDriver : Drivers) {
-            if (existingDriver.equals(driver)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-   
-    
+	public drivers getDriver(String accountId) {
+		for (drivers driver : Drivers) {
+			if (driver.getId().equals(accountId)) {
+				return driver;
+			}
+		}
+		return null;
+	}
+
+	private boolean driverExists(drivers driver) {
+		for (drivers existingDriver : Drivers) {
+			if (existingDriver.equals(driver)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public double getDeliveryCost(int dist) {
+		return perUnitDelivery*dist;
+
+	}
+	public double getRideCost(int dist) {
+		return perUnitRides*dist;
+
+	}
+
+
+
+	public drivers getAvailableDriver() {
+		for (drivers driver : Drivers) {
+			if(driver.getStatus().equals(drivers.Status.Available)) {
+				return driver;
+			}
+		}
+
+		return null;
+	}
+	public void listAllUsers() {
+
+		System.out.println("---- List of Users ----");
+		for (User user : users) {
+			user.infoUser();
+			System.out.println("----------------------");
+		}
+	}
+
+
+
+	public void listAllDrivers() {
+
+		System.out.println("---- List of Drivers ----");
+		for (drivers driver : Drivers) {
+			driver.getInfo();
+			System.out.println("----------------------");
+		}
+	}
+
+
+	public void listAllServices() {
+
+		System.out.println("---- List of Services ----");
+		for (services service : Services) {
+			service.PrintInfo();
+			System.out.println("----------------------");
+		}
+	}
+
+
+
+
+
+	public boolean registerUser(String name, String address, Double wallet) {
+
+		if (name == null || name.isEmpty() ||
+		        address == null || address.isEmpty() ||
+		        wallet == null || wallet < 0) {
+
+			errMessage = "Invalid user";
+			return false;
+		}
+
+
+		User tempUser = new User(registration.genUserID(users), name, address, wallet);
+
+		if (userExists(tempUser)) {
+			errMessage = "User already exists";
+			return false;
+		}
+
+
+		users.add(tempUser);
+
+
+		System.out.println("User registered successfully:");
+
+		return true;
+	}
+
+
+
+
+
+
+
+	public boolean registerNewDriver(String name, String carModel, String carLicencePlate)
+	{
+		if (name == null || name.isEmpty()) {
+			errMessage= "Invalid Driver Name";
+			return false;
+		}
+		if (carModel == null || carModel.isEmpty()) {
+			errMessage = "Invalid Car Model";
+			return false;
+		}
+		if (carLicencePlate == null || carLicencePlate.isEmpty()) {
+			errMessage = "Invalid Car Licence Plate";
+			return false;
+		}
+		String accountId = registration.genDriverID(Drivers);
+		drivers newDriver = new drivers(accountId, name, carModel, carLicencePlate);
+		if (driverExists(newDriver)) {
+			errMessage = "Driver Already Exists in System";
+			return false;
+		}
+		Drivers.add(newDriver);
+		driver_id++;
+		return true;
+	}
+	public String getUsernameFromId(String accountId)
+	{
+		for(User user : users) {
+			if(user.getId().equals(accountId)) {
+				return user.getName();
+			}
+
+		}
+		return null;
+	}
+
+
+
+
 
 }
