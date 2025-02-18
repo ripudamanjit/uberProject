@@ -17,7 +17,6 @@ public class drivers {
         this.carModel = carModel; 
         this.licensePlate = licensePlate; 
         this.wallet = 0;
-        this.address = address;
         this.status= Status.Available;
     }
 
