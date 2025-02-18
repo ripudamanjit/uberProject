@@ -218,6 +218,127 @@ public class SystemManager {
 
 
 
+	public boolean existingRequest(services req) {
+		for (services service : Services) {
+			if (service.equals(req)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
+
+
+
+	public boolean requestRide(String accountId, String from, String to)
+	{
+		if (accountId == null || accountId.isEmpty()) {
+			System.out.println("Invalid User Account");
+			return false;
+		}
+		if (from == null || from.isEmpty() || to == null || to.isEmpty()) {
+			System.out.println("Invalid Address");
+			return false;
+		}
+
+		User user = getUser(accountId);
+		if (user == null) {
+			System.out.println("User Account Not Found");
+			return false;
+		}
+
+
+		int distance = cmap.distance(from, to);
+
+		if (distance <= 1) {
+			System.out.println("Insufficient Travel Distance");
+			return false;
+		}
+		double ridecost = getRideCost(distance);
+		if(user.getWallet()<ridecost) {
+			errMessage= "Insufficient Funds";
+			return false;
+		}
+
+
+		drivers driver = getAvailableDriver();
+		if (driver == null) {
+			System.out.println("No Drivers Available");
+			return false;
+		}
+
+
+		Ride ride = new Ride(driver,from,to,user, distance, getRideCost(distance));
+
+		if (existingRequest(ride)) {
+			errMessage="User Already Has Ride Request";
+			return false;
+		}
+
+		driver.setStatus(drivers.Status.Driving);
+
+		Services.add(ride);
+
+
+
+		return true;
+	}
+
+
+
+
+
+
+	public boolean requestDelivery(String accountId, String from, String to, String restaurant, String foodOrderId)
+{
+	if (accountId == null || accountId.isEmpty()) {
+		System.out.println("Invalid User Account");
+		return false;
+	}
+	if (from == null || from.isEmpty() || to == null || to.isEmpty()) {
+		System.out.println("Invalid Address");
+		return false;
+	}
+	if (restaurant == null || restaurant.isEmpty() || foodOrderId == null || foodOrderId.isEmpty()) {
+		System.out.println("Invalid Restaurant or Food Order");
+		return false;
+	}
+
+	User user = getUser(accountId);
+	if (user == null) {
+		System.out.println("User Account Not Found");
+		return false;
+	}
+
+
+	int distance = cmap.distance(from, to);
+
+	drivers driver = getAvailableDriver();
+	if (driver == null) {
+		System.out.println("No Drivers Available");
+		return false;
+	}
+
+	Delivery delivery = new Delivery(driver, from, to,user, distance,getDeliveryCost(distance), restaurant, foodOrderId);
+
+	if (existingRequest(user, restaurant, foodOrderId)) {
+		System.out.println("User Already Has Delivery Request at Restaurant with this Food Order");
+		return false;
+	}
+
+	driver.setStatus(drivers.Status.Driving);
+
+	Services.add(delivery);
+
+	
+
+	return true;
+}
+
+
+
 
 
 }
