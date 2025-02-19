@@ -146,7 +146,18 @@ public class SystemManager {
 
 
 
+public boolean cancelReq(int req){
+	int adjReq=req-1;
+	if(adjReq<0||adjReq>Services.size()){
+		errMessage="invalid request";
+		return false;
 
+	}
+     services temp = Services.remove(adjReq);
+	 temp.getDriver().setStatus(drivers.Status.Available);
+	 return true;
+
+}
 
 	public boolean registerUser(String name, String address, Double wallet) {
 
@@ -336,6 +347,31 @@ public class SystemManager {
 
 	return true;
 }
+
+public boolean dropOff(int req){
+	int adjReq= req-1;
+	if(adjReq<0||adjReq>Services.size()){
+		errMessage="invalid req";
+		return false;
+	}
+
+   services temp = Services.get(adjReq);
+   double cost=temp.getCost();
+   totalRevenue+=cost;
+   double driverFee= cost*payRate;
+
+   temp.getDriver().setWallet(temp.getDriver().getWallet()+driverFee);
+   totalRevenue-=driverFee;
+   temp.getDriver().setStatus(drivers.Status.Available);
+   temp.getUser().deductWallet(driverFee);
+
+   return true;
+}
+
+
+
+
+
 
 
 
