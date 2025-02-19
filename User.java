@@ -109,5 +109,15 @@ public class User {
         System.out.println();
         user2.infoUser();
     }
+
+
+    
+  public void deductWallet(double cost)
+  {
+    if(wallet>=cost)
+    {
+      wallet-=cost;
+    }
+  }
 }
 
